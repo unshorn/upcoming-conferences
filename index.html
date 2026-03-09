@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conference Deadlines</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f5f5f5;
+      --bg-card: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #555555;
+      --border: #dddddd;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --tab-active-bg: #2563eb;
+      --tab-active-text: #ffffff;
+      --tab-bg: #f5f5f5;
+      --tab-text: #444444;
+      --badge-astar: #15803d;
+      --badge-a: #1d4ed8;
+      --badge-b: #92400e;
+      --badge-other: #6b7280;
+      --pin-upcoming: #16a34a;
+      --pin-soon: #d97706;
+      --pin-past: #6b7280;
+      --deadline-upcoming: #15803d;
+      --deadline-imminent: #b91c1c;
+      --deadline-past: #9ca3af;
+    }
+    [data-theme="dark"] {
+      --bg: #111827;
+      --bg-secondary: #1f2937;
+      --bg-card: #1f2937;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border: #374151;
+      --accent: #3b82f6;
+      --accent-hover: #60a5fa;
+      --tab-active-bg: #3b82f6;
+      --tab-active-text: #ffffff;
+      --tab-bg: #1f2937;
+      --tab-text: #9ca3af;
+      --badge-astar: #22c55e;
+      --badge-a: #60a5fa;
+      --badge-b: #fbbf24;
+      --badge-other: #9ca3af;
+      --pin-upcoming: #22c55e;
+      --pin-soon: #f59e0b;
+      --pin-past: #4b5563;
+      --deadline-upcoming: #4ade80;
+      --deadline-imminent: #f87171;
+      --deadline-past: #6b7280;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      font-size: 14px;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+    header h1 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    header p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    #theme-toggle {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background 0.2s;
+    }
+    #theme-toggle:hover { background: var(--border); }
+    nav.tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+    nav.tabs button {
+      padding: 10px 20px;
+      border: none;
+      background: var(--tab-bg);
+      color: var(--tab-text);
+      cursor: pointer;
+      font-size: 14px;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+    }
+    nav.tabs button.active {
+      background: var(--bg-card);
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      font-weight: 600;
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* MAP TAB */
+    #map-tab { display: none; flex-direction: column; }
+    #map-tab.active { display: flex; }
+    #map { height: 480px; width: 100%; }
+    #venue-details {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      background: var(--bg-secondary);
+    }
+    #venue-details h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    #venue-details table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    /* MAP LEGEND */
+    .map-legend {
+      display: flex;
+      gap: 16px;
+      padding: 8px 16px;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      flex-wrap: wrap;
+    }
+    .map-legend span { display: flex; align-items: center; gap: 5px; }
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-upcoming { background: var(--pin-upcoming); }
+    .dot-soon { background: var(--pin-soon); }
+    .dot-past { background: var(--pin-past); }
+
+    /* DEADLINES TAB */
+    #deadlines-tab { padding: 16px 20px; }
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+      padding: 16px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .filter-group h4 {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .filter-group label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .filter-group input[type="checkbox"] { cursor: pointer; }
+    .filter-group select {
+      width: 100%;
+      padding: 5px 8px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--bg-card);
+      color: var(--text);
+      font-size: 13px;
+    }
+    .filter-group input[type="range"] {
+      width: 100%;
+      margin-top: 4px;
+      accent-color: var(--accent);
+    }
+    .slider-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2px;
+    }
+    .filter-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 8px;
+    }
+    .filter-actions button {
+      padding: 6px 14px;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .filter-actions button:hover { background: var(--border); }
+    .filter-actions button.primary {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+    .filter-actions button.primary:hover { background: var(--accent-hover); }
+
+    .results-summary {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    table.deadline-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table.deadline-table th {
+      text-align: left;
+      padding: 8px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+    }
+    table.deadline-table th:hover { color: var(--accent); }
+    table.deadline-table th .sort-icon { margin-left: 4px; opacity: 0.4; }
+    table.deadline-table th.sorted .sort-icon { opacity: 1; }
+    table.deadline-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    table.deadline-table tr:hover td { background: var(--bg-secondary); }
+    table.deadline-table tr.past-deadline td { color: var(--deadline-past); }
+    .badge {
+      display: inline-block;
+      padding: 1px 7px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--bg-secondary);
+    }
+    .badge-astar { color: var(--badge-astar); border: 1px solid var(--badge-astar); }
+    .badge-a { color: var(--badge-a); border: 1px solid var(--badge-a); }
+    .badge-b { color: var(--badge-b); border: 1px solid var(--badge-b); }
+    .badge-other { color: var(--badge-other); border: 1px solid var(--badge-other); }
+    .deadline-date {
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .deadline-date.upcoming { color: var(--deadline-upcoming); font-weight: 600; }
+    .deadline-date.imminent { color: var(--deadline-imminent); font-weight: 700; }
+    .deadline-date.past { color: var(--deadline-past); }
+    .countdown {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .track-label {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Leaflet dark mode adjustments */
+    [data-theme="dark"] .leaflet-tile { filter: invert(1) hue-rotate(180deg); }
+    [data-theme="dark"] .leaflet-container { background: #111827; }
+    [data-theme="dark"] .leaflet-popup-content-wrapper {
+      background: var(--bg-card);
+      color: var(--text);
+    }
+    [data-theme="dark"] .leaflet-popup-tip { background: var(--bg-card); }
+
+    @media (max-width: 700px) {
+      .filters { grid-template-columns: 1fr; }
+      table.deadline-table th:nth-child(4),
+      table.deadline-table td:nth-child(4),
+      table.deadline-table th:nth-child(6),
+      table.deadline-table td:nth-child(6) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Conference Deadlines</h1>
+    <p>Software Engineering &middot; Programming Languages &middot; Security</p>
+  </div>
+  <button id="theme-toggle">Dark mode</button>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="map">Map</button>
+  <button class="tab" data-tab="deadlines">Deadlines</button>
+</nav>
+
+<!-- MAP TAB -->
+<div id="map-tab" class="tab-content active">
+  <div class="map-legend">
+    <span><span class="dot dot-upcoming"></span> Deadline upcoming (&gt;30 days)</span>
+    <span><span class="dot dot-soon"></span> Deadline soon (&le;30 days)</span>
+    <span><span class="dot dot-past"></span> Deadline past (conference still upcoming)</span>
+    <span title="Dates prefixed with ~ are estimated from prior-year patterns and may not be confirmed yet" style="cursor:help">~ = estimated date</span>
+  </div>
+  <div id="map"></div>
+  <div id="venue-details" style="display:none">
+    <h3 id="venue-title"></h3>
+    <table class="deadline-table" id="venue-table">
+      <thead>
+        <tr>
+          <th>Conference</th>
+          <th>Track</th>
+          <th>Deadline</th>
+          <th>Notification</th>
+          <th>Dates</th>
+          <th>Links</th>
+        </tr>
+      </thead>
+      <tbody id="venue-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- DEADLINES TAB -->
+<div id="deadlines-tab" class="tab-content">
+  <div class="filters">
+    <!-- Field -->
+    <div class="filter-group">
+      <h4>Field of Research</h4>
+      <label><input type="checkbox" class="filter-field" value="software engineering" checked> Software Engineering</label>
+      <label><input type="checkbox" class="filter-field" value="programming languages" checked> Programming Languages</label>
+      <label><input type="checkbox" class="filter-field" value="security" checked> Security</label>
+    </div>
+    <!-- CORE rank -->
+    <div class="filter-group">
+      <h4>CORE Ranking (minimum)</h4>
+      <select id="filter-rank">
+        <option value="A*">A* only</option>
+        <option value="A">A and above</option>
+        <option value="B" selected>B and above</option>
+        <option value="all">All ranked</option>
+        <option value="unranked">Unranked only</option>
+        <option value="any">Any</option>
+      </select>
+    </div>
+    <!-- Deadline slider -->
+    <div class="filter-group">
+      <h4>Show deadlines</h4>
+      <label><input type="checkbox" id="filter-show-past"> Include past deadlines</label>
+      <label style="margin-top:8px">Within next <strong id="slider-val">12</strong> months:</label>
+      <input type="range" id="filter-months" min="1" max="36" value="12">
+      <div class="slider-label"><span>1 mo</span><span>36 mo</span></div>
+    </div>
+    <!-- Location -->
+    <div class="filter-group">
+      <h4>Location</h4>
+      <label><input type="checkbox" class="filter-region" value="Europe" checked> Europe</label>
+      <label><input type="checkbox" class="filter-region" value="Asia" checked> Asia</label>
+      <label><input type="checkbox" class="filter-region" value="Middle East" checked> Middle East</label>
+      <label><input type="checkbox" class="filter-region" value="Australasia" checked> Australasia</label>
+      <label><input type="checkbox" class="filter-region" value="North America" checked> North America</label>
+      <label><input type="checkbox" class="filter-region" value="other" checked> Other / TBD</label>
+    </div>
+    <!-- Sponsor -->
+    <div class="filter-group">
+      <h4>Sponsor</h4>
+      <label><input type="checkbox" class="filter-sponsor" value="IEEE" checked> IEEE</label>
+      <label><input type="checkbox" class="filter-sponsor" value="ACM" checked> ACM</label>
+      <label><input type="checkbox" class="filter-sponsor" value="USENIX" checked> USENIX</label>
+      <label><input type="checkbox" class="filter-sponsor" value="other" checked> Other / N/A</label>
+    </div>
+    <!-- Actions -->
+    <div class="filter-actions">
+      <button class="primary" onclick="applyFilters()">Apply filters</button>
+      <button onclick="resetFilters()">Reset</button>
+    </div>
+  </div>
+
+  <div class="results-summary" id="results-summary"></div>
+  <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px" title="Dates prefixed with ~ are estimated from prior-year patterns and may not be confirmed yet">~ = estimated date, verify before submitting</div>
+
+  <table class="deadline-table" id="deadline-table">
+    <thead>
+      <tr>
+        <th data-col="acronymx" onclick="sortBy('acronymx')">Conference <span class="sort-icon">&#8597;</span></th>
+        <th data-col="track">Track</th>
+        <th data-col="submission-deadline" onclick="sortBy('submission-deadline')" class="sorted">Deadline <span class="sort-icon">&#8597;</span></th>
+        <th data-col="notification" onclick="sortBy('notification')">Notification <span class="sort-icon">&#8597;</span></th>
+        <th data-col="city" onclick="sortBy('city')">Location <span class="sort-icon">&#8597;</span></th>
+        <th data-col="dates">Conf. Dates</th>
+        <th>Links</th>
+      </tr>
+    </thead>
+    <tbody id="deadline-tbody"></tbody>
+  </table>
+  <div class="no-results" id="no-results" style="display:none">No conferences match the current filters.</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ── Data ──────────────────────────────────────────────────────────────────────
+let allConferences = [];
+let allDeadlines = [];
+let enriched = [];
+let map;
+let markers = {};
+let sortCol = 'submission-deadline';
+let sortAsc = true;
+const TODAY = new Date();
+
+// ── Theme ─────────────────────────────────────────────────────────────────────
+function getTheme() {
+  try { return document.cookie.split(';').find(c => c.trim().startsWith('theme='))?.split('=')[1] || 'light'; }
+  catch { return 'light'; }
+}
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('theme-toggle').textContent = t === 'dark' ? 'Light mode' : 'Dark mode';
+  document.cookie = 'theme=' + t + '; max-age=31536000; path=/';
+  if (map) map.invalidateSize();
+}
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  setTheme(current === 'dark' ? 'light' : 'dark');
+});
+setTheme(getTheme());
+
+// ── Tabs ──────────────────────────────────────────────────────────────────────
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab + '-tab').classList.add('active');
+    if (btn.dataset.tab === 'map' && map) map.invalidateSize();
+  });
+});
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function parseDate(s) { return s ? new Date(s) : null; }
+
+function daysFrom(date) {
+  if (!date) return null;
+  return Math.round((date - TODAY) / 86400000);
+}
+
+function formatDate(s, estimated) {
+  if (!s) return '—';
+  const d = parseDate(s);
+  const str = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  return estimated ? `~${str}` : str;
+}
+
+function deadlineClass(s) {
+  const days = daysFrom(parseDate(s));
+  if (days === null) return '';
+  if (days < 0) return 'past';
+  if (days <= 30) return 'imminent';
+  return 'upcoming';
+}
+
+function countdown(s) {
+  const days = daysFrom(parseDate(s));
+  if (days === null) return '';
+  if (days < 0) return `${-days}d ago`;
+  if (days === 0) return 'today!';
+  if (days === 1) return 'tomorrow!';
+  return `in ${days}d`;
+}
+
+function rankBadge(rank) {
+  if (!rank) return '<span class="badge badge-other">unranked</span>';
+  const cls = rank === 'A*' ? 'astar' : rank === 'A' ? 'a' : rank === 'B' ? 'b' : 'other';
+  return `<span class="badge badge-${cls}">${rank}</span>`;
+}
+
+function sponsorMatch(sponsor, filters) {
+  if (!sponsor) return filters.includes('other');
+  const s = sponsor.toUpperCase();
+  if (filters.includes('IEEE') && s.includes('IEEE')) return true;
+  if (filters.includes('ACM') && s.includes('ACM')) return true;
+  if (filters.includes('USENIX') && s.includes('USENIX')) return true;
+  if (filters.includes('other')) {
+    const known = ['IEEE', 'ACM', 'USENIX'];
+    if (!known.some(k => s.includes(k))) return true;
+  }
+  return false;
+}
+
+function rankPassesFilter(rank, filterVal) {
+  if (filterVal === 'any') return true;
+  if (filterVal === 'unranked') return !rank;
+  if (!rank) return false;
+  const order = { 'A*': 4, 'A': 3, 'B': 2, 'C': 1 };
+  const minOrder = order[filterVal] || 0;
+  return (order[rank] || 0) >= minOrder;
+}
+
+// ── Load data ─────────────────────────────────────────────────────────────────
+Promise.all([
+  fetch('conferences.json').then(r => r.json()),
+  fetch('deadlines.json').then(r => r.json())
+]).then(([conferences, deadlines]) => {
+  allConferences = conferences;
+  allDeadlines = deadlines;
+
+  const confMap = {};
+  conferences.forEach(c => {
+    if (!confMap[c.acronym]) confMap[c.acronym] = c;
+  });
+
+  enriched = deadlines.map(d => ({
+    ...d,
+    conf: confMap[d.acronym] || {}
+  }));
+
+  initMap();
+  applyFilters();
+}).catch(err => {
+  console.error('Failed to load data:', err);
+  document.getElementById('deadline-tbody').innerHTML =
+    '<tr><td colspan="7" style="text-align:center;color:var(--deadline-imminent);padding:20px">Failed to load data. Serve via HTTP (e.g. python3 -m http.server 8080).</td></tr>';
+});
+
+// ── Slider ────────────────────────────────────────────────────────────────────
+document.getElementById('filter-months').addEventListener('input', function() {
+  document.getElementById('slider-val').textContent = this.value;
+});
+
+// ── Map ───────────────────────────────────────────────────────────────────────
+function pinColor(d) {
+  const days = daysFrom(parseDate(d['submission-deadline']));
+  if (days === null) return '#6b7280';
+  if (days < 0) return '#6b7280';
+  if (days <= 30) return '#d97706';
+  return '#16a34a';
+}
+
+function circleIcon(color) {
+  return L.divIcon({
+    className: '',
+    html: `<div style="width:14px;height:14px;border-radius:50%;background:${color};border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,0.4)"></div>`,
+    iconSize: [14, 14],
+    iconAnchor: [7, 7],
+    popupAnchor: [0, -10]
+  });
+}
+
+function initMap() {
+  map = L.map('map', { zoomControl: true }).setView([30, 10], 2);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 18
+  }).addTo(map);
+
+  // Group deadlines by venue city
+  const byCity = {};
+  enriched.forEach(d => {
+    if (!d.venue || d.venue.lat == null) return;
+    // Only show conferences with future conference dates
+    const confDate = parseDate((d.dates || '').split(' ').pop() + '-01') || TODAY;
+    const key = `${d.venue.city}|${d.acronym}`;
+    if (!byCity[key]) byCity[key] = { city: d.venue.city, lat: d.venue.lat, lon: d.venue.lon, entries: [] };
+    byCity[key].entries.push(d);
+  });
+
+  // For each city+conference combo, pick most "urgent" deadline for color
+  Object.entries(byCity).forEach(([key, v]) => {
+    // Sort entries by deadline ascending
+    const sorted = v.entries.slice().sort((a, b) =>
+      (parseDate(a['submission-deadline']) || new Date(9999,0)) -
+      (parseDate(b['submission-deadline']) || new Date(9999,0))
+    );
+    const best = sorted.find(d => daysFrom(parseDate(d['submission-deadline'])) >= 0) || sorted[0];
+    const color = pinColor(best);
+    const acronym = best.acronymx || best.acronym;
+    const deadline = best['submission-deadline'] ? formatDate(best['submission-deadline'], best.estimated) : 'TBD';
+
+    const marker = L.marker([v.lat, v.lon], { icon: circleIcon(color) }).addTo(map);
+    marker.bindPopup(
+      `<b>${acronym}</b><br>Deadline: ${deadline}<br><em>Click pin for details</em>`,
+      { maxWidth: 200 }
+    );
+    marker.on('click', () => showVenueDetails(v.city, sorted));
+    markers[key] = marker;
+  });
+}
+
+function showVenueDetails(city, entries) {
+  document.getElementById('venue-details').style.display = 'block';
+  document.getElementById('venue-title').textContent = `${city} — Conference Details`;
+  const tbody = document.getElementById('venue-tbody');
+  tbody.innerHTML = '';
+
+  const groups = {};
+  entries.forEach(d => {
+    const k = d.acronym + '|' + d.acronymx;
+    if (!groups[k]) groups[k] = { d, tracks: [] };
+    groups[k].tracks.push(d);
+  });
+
+  Object.values(groups).forEach(({ d, tracks }) => {
+    const conf = d.conf || {};
+    const rowspan = tracks.length;
+    tracks.forEach((t, i) => {
+      const tr = document.createElement('tr');
+      const dlClass = deadlineClass(t['submission-deadline']);
+      tr.className = dlClass === 'past' ? 'past-deadline' : '';
+      let html = '';
+      if (i === 0) {
+        html += `<td rowspan="${rowspan}">
+          <a href="${d.url}" target="_blank" rel="noopener">${t.acronymx}</a><br>
+          ${rankBadge(conf['core-rank']?.rank)}
+        </td>`;
+      }
+      html += `<td><span class="track-label">${t.track}</span></td>`;
+      html += `<td><span class="deadline-date ${dlClass}">${formatDate(t['submission-deadline'], t.estimated)}</span>
+               <span class="countdown">${countdown(t['submission-deadline'])}</span></td>`;
+      html += `<td>${formatDate(t.notification)}</td>`;
+      if (i === 0) html += `<td rowspan="${rowspan}">${t.dates || '—'}</td>`;
+      html += `<td>${t.cfp ? `<a href="${t.cfp}" target="_blank" rel="noopener">CFP</a>` : '—'}</td>`;
+      tr.innerHTML = html;
+      tbody.appendChild(tr);
+    });
+  });
+
+  document.getElementById('venue-details').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ── Deadline Table ────────────────────────────────────────────────────────────
+function sortBy(col) {
+  if (sortCol === col) { sortAsc = !sortAsc; }
+  else { sortCol = col; sortAsc = true; }
+  document.querySelectorAll('#deadline-table th').forEach(th => th.classList.remove('sorted'));
+  document.querySelector(`#deadline-table th[data-col="${col}"]`)?.classList.add('sorted');
+  applyFilters();
+}
+
+function applyFilters() {
+  const fields = [...document.querySelectorAll('.filter-field:checked')].map(c => c.value);
+  const regions = [...document.querySelectorAll('.filter-region:checked')].map(c => c.value);
+  const sponsors = [...document.querySelectorAll('.filter-sponsor:checked')].map(c => c.value);
+  const rankFilter = document.getElementById('filter-rank').value;
+  const showPast = document.getElementById('filter-show-past').checked;
+  const months = parseInt(document.getElementById('filter-months').value);
+  const cutoff = new Date(TODAY);
+  cutoff.setMonth(cutoff.getMonth() + months);
+
+  let rows = enriched.filter(d => {
+    const conf = d.conf || {};
+    // Field
+    if (!fields.includes(conf.field)) return false;
+    // CORE rank
+    if (!rankPassesFilter(conf['core-rank']?.rank, rankFilter)) return false;
+    // Region
+    const region = d.venue?.region || 'other';
+    if (!regions.includes(region)) return false;
+    // Sponsor
+    if (!sponsorMatch(conf.sponsor, sponsors)) return false;
+    // Deadline filter
+    const dl = parseDate(d['submission-deadline']);
+    if (!showPast && dl && dl < TODAY) return false;
+    if (dl && dl > cutoff) return false;
+    return true;
+  });
+
+  // Sort
+  rows.sort((a, b) => {
+    let av, bv;
+    if (sortCol === 'submission-deadline' || sortCol === 'notification') {
+      av = parseDate(a[sortCol]) || new Date(sortAsc ? 9999000000000 : 0);
+      bv = parseDate(b[sortCol]) || new Date(sortAsc ? 9999000000000 : 0);
+      return sortAsc ? av - bv : bv - av;
+    } else if (sortCol === 'acronymx') {
+      av = a.acronymx || '';
+      bv = b.acronymx || '';
+    } else if (sortCol === 'city') {
+      av = a.venue?.city || '';
+      bv = b.venue?.city || '';
+    } else {
+      av = a[sortCol] || '';
+      bv = b[sortCol] || '';
+    }
+    return sortAsc ? av.localeCompare(bv) : bv.localeCompare(av);
+  });
+
+  renderTable(rows);
+  document.getElementById('results-summary').textContent =
+    `Showing ${rows.length} deadline${rows.length !== 1 ? 's' : ''}`;
+}
+
+function renderTable(rows) {
+  const tbody = document.getElementById('deadline-tbody');
+  const noResults = document.getElementById('no-results');
+  tbody.innerHTML = '';
+
+  if (rows.length === 0) {
+    noResults.style.display = 'block';
+    return;
+  }
+  noResults.style.display = 'none';
+
+  rows.forEach(d => {
+    const conf = d.conf || {};
+    const rank = conf['core-rank']?.rank;
+    const rankUrl = conf['core-rank']?.url;
+    const dlClass = deadlineClass(d['submission-deadline']);
+
+    const tr = document.createElement('tr');
+    tr.className = dlClass === 'past' ? 'past-deadline' : '';
+    tr.innerHTML = `
+      <td>
+        <a href="${d.url}" target="_blank" rel="noopener"><strong>${d.acronymx}</strong></a>
+        ${rankUrl ? `<a href="${rankUrl}" target="_blank" rel="noopener">${rankBadge(rank)}</a>` : rankBadge(rank)}
+        <div style="font-size:11px;color:var(--text-muted);margin-top:2px">${conf.sponsor || ''}</div>
+      </td>
+      <td><span class="track-label">${d.track}</span></td>
+      <td>
+        <span class="deadline-date ${dlClass}">${formatDate(d['submission-deadline'], d.estimated)}</span><br>
+        <span class="countdown">${countdown(d['submission-deadline'])}</span>
+      </td>
+      <td>${formatDate(d.notification)}</td>
+      <td>
+        ${d.venue?.city || '—'}
+        ${d.venue?.region ? `<span class="track-label"> (${d.venue.region})</span>` : ''}
+      </td>
+      <td style="white-space:nowrap">${d.dates || '—'}</td>
+      <td>
+        ${d.cfp ? `<a href="${d.cfp}" target="_blank" rel="noopener">CFP</a>` : ''}
+        ${d.url ? ` <a href="${d.url}" target="_blank" rel="noopener">Web</a>` : ''}
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function resetFilters() {
+  document.querySelectorAll('.filter-field').forEach(c => c.checked = true);
+  document.querySelectorAll('.filter-region').forEach(c => c.checked = true);
+  document.querySelectorAll('.filter-sponsor').forEach(c => c.checked = true);
+  document.getElementById('filter-rank').value = 'B';
+  document.getElementById('filter-show-past').checked = false;
+  document.getElementById('filter-months').value = 12;
+  document.getElementById('slider-val').textContent = '12';
+  applyFilters();
+}
+</script>
+</body>
+</html>

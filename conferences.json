@@ -1,0 +1,283 @@
+[
+  {
+    "name": "International Conference on Software Engineering",
+    "acronym": "ICSE",
+    "url": "https://www.icse-conferences.org/",
+    "see-also": [
+      "https://conf.researchr.org/series/icse",
+      "https://dl.acm.org/conference/icse"
+    ],
+    "core-rank": {
+      "rank": "A*",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/1209/"
+    },
+    "field": "software engineering",
+    "sponsor": "IEEE/ACM"
+  },
+  {
+    "name": "ACM International Conference on the Foundations of Software Engineering",
+    "acronym": "FSE",
+    "url": "https://www.esec-fse.org/",
+    "see-also": [
+      "https://conf.researchr.org/series/fse",
+      "https://dl.acm.org/conference/fse"
+    ],
+    "core-rank": {
+      "rank": "A*",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=FSE&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "software engineering",
+    "sponsor": "ACM"
+  },
+  {
+    "name": "IEEE/ACM International Conference on Automated Software Engineering",
+    "acronym": "ASE",
+    "url": "https://ase-conferences.org/",
+    "see-also": [
+      "https://conf.researchr.org/series/ase"
+    ],
+    "core-rank": {
+      "rank": "A*",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=ASE&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "software engineering",
+    "sponsor": "IEEE/ACM"
+  },
+  {
+    "name": "IEEE International Conference on Software Maintenance and Evolution",
+    "acronym": "ICSME",
+    "url": "https://conf.researchr.org/series/ICSME",
+    "see-also": [],
+    "core-rank": {
+      "rank": "A",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=ICSME&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "software engineering",
+    "sponsor": "IEEE"
+  },
+  {
+    "name": "IEEE International Conference on Software Analysis, Evolution and Reengineering",
+    "acronym": "SANER",
+    "url": "https://conf.researchr.org/series/saner",
+    "see-also": [],
+    "core-rank": {
+      "rank": "A",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=SANER&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "software engineering",
+    "sponsor": "IEEE"
+  },
+  {
+    "name": "IEEE/ACM International Working Conference on Mining Software Repositories",
+    "acronym": "MSR",
+    "url": "https://conf.researchr.org/series/msr",
+    "see-also": [
+      "https://www.msrconf.org/"
+    ],
+    "core-rank": {
+      "rank": "A",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=MSR&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "software engineering",
+    "sponsor": "IEEE/ACM"
+  },
+  {
+    "name": "Asia-Pacific Software Engineering Conference",
+    "acronym": "APSEC",
+    "url": "https://conf.researchr.org/series/apsec",
+    "see-also": [],
+    "core-rank": {
+      "rank": "B",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=APSEC&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "software engineering",
+    "sponsor": "IEEE"
+  },
+  {
+    "name": "ACM SIGPLAN Conference on Programming Language Design and Implementation",
+    "acronym": "PLDI",
+    "url": "https://dl.acm.org/conference/pldi",
+    "see-also": [
+      "https://conf.researchr.org/series/pldi",
+      "https://www.sigplan.org/Conferences/PLDI/"
+    ],
+    "core-rank": {
+      "rank": "A*",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=PLDI&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "programming languages",
+    "sponsor": "ACM"
+  },
+  {
+    "name": "ACM SIGPLAN Symposium on Principles of Programming Languages",
+    "acronym": "POPL",
+    "url": "https://dl.acm.org/conference/popl",
+    "see-also": [
+      "https://conf.researchr.org/series/popl",
+      "https://www.sigplan.org/Conferences/POPL/"
+    ],
+    "core-rank": {
+      "rank": "A*",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=POPL&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "programming languages",
+    "sponsor": "ACM"
+  },
+  {
+    "name": "ACM SIGPLAN International Conference on Object-Oriented Programming, Systems, Languages, and Applications",
+    "acronym": "OOPSLA",
+    "url": "https://dl.acm.org/conference/oopsla",
+    "see-also": [
+      "https://conf.researchr.org/series/splash",
+      "https://www.sigplan.org/Conferences/OOPSLA/"
+    ],
+    "core-rank": {
+      "rank": "A*",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=OOPSLA&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "programming languages",
+    "sponsor": "ACM"
+  },
+  {
+    "name": "European Conference on Object-Oriented Programming",
+    "acronym": "ECOOP",
+    "url": "https://conf.researchr.org/series/ecoop",
+    "see-also": [
+      "https://www.ecoop.org/"
+    ],
+    "core-rank": {
+      "rank": "A*",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=ECOOP&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "programming languages",
+    "sponsor": "ACM/AITO"
+  },
+  {
+    "name": "ACM SIGPLAN International Conference on Functional Programming",
+    "acronym": "ICFP",
+    "url": "https://icfpconference.org/",
+    "see-also": [
+      "https://conf.researchr.org/series/icfp",
+      "https://www.sigplan.org/Conferences/ICFP/"
+    ],
+    "core-rank": {
+      "rank": "A*",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=ICFP&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "programming languages",
+    "sponsor": "ACM"
+  },
+  {
+    "name": "USENIX Security Symposium",
+    "acronym": "USENIX Security",
+    "url": "https://www.usenix.org/conferences/byname/108",
+    "see-also": [
+      "https://www.usenix.org/conferences"
+    ],
+    "core-rank": {
+      "rank": "A*",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=USENIX+Security&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "security",
+    "sponsor": "USENIX"
+  },
+  {
+    "name": "ACM Conference on Computer and Communications Security",
+    "acronym": "CCS",
+    "url": "https://www.sigsac.org/ccs.html",
+    "see-also": [
+      "https://dl.acm.org/conference/ccs"
+    ],
+    "core-rank": {
+      "rank": "A*",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=CCS&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "security",
+    "sponsor": "ACM"
+  },
+  {
+    "name": "European Symposium on Research in Computer Security",
+    "acronym": "ESORICS",
+    "url": null,
+    "see-also": [],
+    "core-rank": {
+      "rank": "A",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=ESORICS&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "security",
+    "sponsor": "Springer LNCS"
+  },
+  {
+    "name": "IEEE International Conference on Trust, Security and Privacy in Computing and Communications",
+    "acronym": "TrustCom",
+    "url": "https://www.ieee-security.org/",
+    "see-also": [],
+    "core-rank": {
+      "rank": "B",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=TrustCom&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "security",
+    "sponsor": "IEEE"
+  },
+  {
+    "name": "IEEE Symposium on Security and Privacy",
+    "acronym": "S&P",
+    "url": "https://www.ieee-security.org/TC/SP-Index.html",
+    "see-also": [
+      "https://sp2026.ieee-security.org/"
+    ],
+    "core-rank": {
+      "rank": "A*",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=IEEE+Symposium+Security+Privacy&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "security",
+    "sponsor": "IEEE"
+  },
+  {
+    "name": "ACM Asia Conference on Computer and Communications Security",
+    "acronym": "ASIACCS",
+    "url": null,
+    "see-also": [
+      "https://dl.acm.org/conference/asiaccs"
+    ],
+    "core-rank": {
+      "rank": "A",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=ASIACCS&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "security",
+    "sponsor": "ACM"
+  },
+  {
+    "name": "IEEE European Symposium on Security and Privacy",
+    "acronym": "Euro S&P",
+    "url": "https://www.ieee-security.org/",
+    "see-also": [
+      "https://eurosp2026.ieee-security.org/"
+    ],
+    "core-rank": {
+      "rank": "B",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=Euro+SP&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "security",
+    "sponsor": "IEEE"
+  }
+]
