@@ -330,6 +330,7 @@
 <nav class="tabs">
   <button class="tab" data-tab="map">Map</button>
   <button class="tab active" data-tab="deadlines">Deadlines</button>
+  <button class="tab" data-tab="contribute">How to Contribute</button>
 </nav>
 
 <!-- MAP TAB -->
@@ -432,6 +433,109 @@
     <tbody id="deadline-tbody"></tbody>
   </table>
   <div class="no-results" id="no-results" style="display:none">No conferences match the current filters.</div>
+</div>
+
+<!-- CONTRIBUTE TAB -->
+<div id="contribute-tab" class="tab-content">
+  <div style="max-width:800px;margin:0 auto;padding:24px 20px;line-height:1.7">
+    <h2 style="font-size:18px;font-weight:600;margin-bottom:16px">How to Contribute</h2>
+    <p style="color:var(--text-muted);margin-bottom:20px">
+      Contributions are welcome! The database is maintained as plain JSON files in a
+      <a href="https://github.com/jensdietrich/upcoming-conferences" target="_blank" rel="noopener">GitHub repository</a>.
+      The easiest way to contribute is to edit <code>conferences.json</code> or <code>deadlines.json</code>
+      directly on GitHub and open a pull request.
+    </p>
+
+    <h3 style="font-size:15px;font-weight:600;margin-bottom:10px">Adding or correcting a conference deadline</h3>
+    <ol style="padding-left:20px;color:var(--text-muted);margin-bottom:20px">
+      <li style="margin-bottom:8px">
+        Go to <a href="https://github.com/jensdietrich/upcoming-conferences/blob/main/deadlines.json" target="_blank" rel="noopener">deadlines.json</a>
+        on GitHub and click the pencil icon (<strong>Edit this file</strong>).
+      </li>
+      <li style="margin-bottom:8px">
+        Add a new JSON object to the array (or correct an existing one). Each entry follows this schema:
+        <pre style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:6px;padding:12px;margin:10px 0;font-size:12px;overflow-x:auto">{
+  "name": "49th International Conference on Software Engineering",
+  "acronym": "ICSE",
+  "acronymx": "ICSE'27",
+  "url": "https://conf.researchr.org/home/icse-2027",
+  "track": "research",
+  "submission-deadline": "2026-06-30",
+  "estimated": true,
+  "notification": "2026-10-10",
+  "cfp": "https://...",
+  "venue": {
+    "city": "Dublin",
+    "address": "Convention Centre Dublin, Dublin, Ireland",
+    "lat": 53.3498,
+    "lon": -6.2603,
+    "region": "Europe"
+  },
+  "dates": "April 25 - May 1, 2027"
+}</pre>
+      </li>
+      <li style="margin-bottom:8px">
+        Set <code>"estimated": true</code> if the deadline is inferred from prior years rather than confirmed from the official CFP.
+        Omit the field (or set it to <code>false</code>) for confirmed dates.
+        Estimated dates are shown with a <code>~</code> prefix on the site.
+      </li>
+      <li style="margin-bottom:8px">
+        Valid values for <code>region</code>: <code>Europe</code>, <code>Asia</code>, <code>Middle East</code>,
+        <code>Australasia</code>, <code>North America</code>, <code>other</code>.
+      </li>
+      <li style="margin-bottom:8px">
+        Only include URLs you have verified load successfully (no 404s, no placeholder domains).
+        Use <code>null</code> for any URL that is not yet available.
+      </li>
+      <li style="margin-bottom:8px">
+        Click <strong>Propose changes</strong>, then <strong>Create pull request</strong>.
+      </li>
+    </ol>
+
+    <h3 style="font-size:15px;font-weight:600;margin-bottom:10px">Adding a new conference series</h3>
+    <ol style="padding-left:20px;color:var(--text-muted);margin-bottom:20px">
+      <li style="margin-bottom:8px">
+        Go to <a href="https://github.com/jensdietrich/upcoming-conferences/blob/main/conferences.json" target="_blank" rel="noopener">conferences.json</a>
+        on GitHub and click the pencil icon.
+      </li>
+      <li style="margin-bottom:8px">
+        Add a new JSON object:
+        <pre style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:6px;padding:12px;margin:10px 0;font-size:12px;overflow-x:auto">{
+  "name": "Full conference name",
+  "acronym": "ACRONYM",
+  "url": "https://official-series-url.org/",
+  "see-also": [],
+  "core-rank": {
+    "rank": "A*",
+    "system": "CORE2023",
+    "url": "https://portal.core.edu.au/conf-ranks/..."
+  },
+  "field": "software engineering",
+  "sponsor": "IEEE/ACM"
+}</pre>
+      </li>
+      <li style="margin-bottom:8px">
+        Valid values for <code>field</code>: <code>software engineering</code>, <code>programming languages</code>, <code>security</code>.
+      </li>
+      <li style="margin-bottom:8px">
+        Valid values for <code>core-rank.rank</code>: <code>A*</code>, <code>A</code>, <code>B</code>, <code>C</code>.
+        Look up the ranking at <a href="https://portal.core.edu.au/conf-ranks/" target="_blank" rel="noopener">portal.core.edu.au</a>.
+      </li>
+      <li style="margin-bottom:8px">
+        Then add the corresponding deadline entries to <code>deadlines.json</code> as described above.
+      </li>
+      <li style="margin-bottom:8px">Open a pull request with both files changed.</li>
+    </ol>
+
+    <h3 style="font-size:15px;font-weight:600;margin-bottom:10px">Other ways to help</h3>
+    <ul style="padding-left:20px;color:var(--text-muted)">
+      <li style="margin-bottom:6px">Confirm or correct an estimated deadline (marked <code>~</code>) by finding the official CFP and updating the entry.</li>
+      <li style="margin-bottom:6px">Remove entries for conferences that have already taken place.</li>
+      <li style="margin-bottom:6px">Fix a broken URL — set it to <code>null</code> or provide the correct address.</li>
+      <li style="margin-bottom:6px">Open an <a href="https://github.com/jensdietrich/upcoming-conferences/issues" target="_blank" rel="noopener">issue</a>
+        to report missing or incorrect data.</li>
+    </ul>
+  </div>
 </div>
 
 <footer style="text-align:center;padding:16px;font-size:12px;color:var(--text-muted);border-top:1px solid var(--border);margin-top:24px">
