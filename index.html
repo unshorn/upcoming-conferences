@@ -118,6 +118,8 @@
     /* MAP TAB */
     #map-tab { display: none; flex-direction: column; }
     #map-tab.active { display: flex; }
+    #deadlines-tab { display: none; }
+    #deadlines-tab.active { display: block; }
     #map { height: 480px; width: 100%; }
     #venue-details {
       padding: 16px 20px;
@@ -326,12 +328,12 @@
 </header>
 
 <nav class="tabs">
-  <button class="tab active" data-tab="map">Map</button>
-  <button class="tab" data-tab="deadlines">Deadlines</button>
+  <button class="tab" data-tab="map">Map</button>
+  <button class="tab active" data-tab="deadlines">Deadlines</button>
 </nav>
 
 <!-- MAP TAB -->
-<div id="map-tab" class="tab-content active">
+<div id="map-tab" class="tab-content">
   <div class="map-legend">
     <span><span class="dot dot-upcoming"></span> Deadline upcoming (&gt;30 days)</span>
     <span><span class="dot dot-soon"></span> Deadline soon (&le;30 days)</span>
@@ -358,7 +360,7 @@
 </div>
 
 <!-- DEADLINES TAB -->
-<div id="deadlines-tab" class="tab-content">
+<div id="deadlines-tab" class="tab-content active">
   <div class="filters">
     <!-- Field -->
     <div class="filter-group">
