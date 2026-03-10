@@ -422,5 +422,18 @@
     },
     "field": "artificial intelligence",
     "sponsor": "other"
+  },
+  {
+    "name": "World Conference on eXplainable Artificial Intelligence",
+    "acronym": "xAI",
+    "url": "https://xaiworldconference.com/",
+    "see-also": [],
+    "core-rank": {
+      "rank": null,
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=xAI&by=all&source=CORE2023&sort=arank&page=1"
+    },
+    "field": "artificial intelligence",
+    "sponsor": "other"
   }
 ]

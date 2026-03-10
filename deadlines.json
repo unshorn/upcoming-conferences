@@ -889,5 +889,24 @@
       "region": "Australasia"
     },
     "dates": "November 2026"
+  },
+  {
+    "name": "3rd World Conference on eXplainable Artificial Intelligence",
+    "acronym": "xAI",
+    "acronymx": "xAI'25",
+    "url": "https://xaiworldconference.com/2025/",
+    "track": "research",
+    "submission-deadline": "2025-02-28",
+    "estimated": false,
+    "notification": "2025-03-24",
+    "cfp": "https://xaiworldconference.com/2025/call-for-papers/",
+    "venue": {
+      "city": "Istanbul",
+      "address": "Istanbul, Turkey",
+      "lat": 41.0082,
+      "lon": 28.9784,
+      "region": "Europe"
+    },
+    "dates": "July 9-11, 2025"
   }
 ]
