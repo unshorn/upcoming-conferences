@@ -637,8 +637,8 @@
     "venue": {
       "city": "Singapore",
       "address": "Singapore EXPO, Singapore",
-      "lat": 1.3340,
-      "lon": 103.9610,
+      "lat": 1.334,
+      "lon": 103.961,
       "region": "Asia"
     },
     "dates": "January 20-27, 2026"
@@ -692,12 +692,69 @@
     "notification": null,
     "cfp": null,
     "venue": {
-      "city": "Malmö",
-      "address": "Malmö, Sweden",
+      "city": "Malm\u00f6",
+      "address": "Malm\u00f6, Sweden",
       "lat": 55.6049,
       "lon": 13.0038,
       "region": "Europe"
     },
     "dates": "September 8-13, 2026"
+  },
+  {
+    "name": "39th Australasian Joint Conference on Artificial Intelligence",
+    "acronym": "AJCAI",
+    "acronymx": "AJCAI'26",
+    "url": "https://ajcai26.org/",
+    "track": "research",
+    "submission-deadline": "2026-07-01",
+    "estimated": true,
+    "notification": "2026-09-01",
+    "cfp": null,
+    "venue": {
+      "city": "Auckland",
+      "address": "Auckland, New Zealand",
+      "lat": -36.8485,
+      "lon": 174.7633,
+      "region": "Australasia"
+    },
+    "dates": "November 26-30, 2026"
+  },
+  {
+    "name": "40th International Conference on Image and Vision Computing New Zealand",
+    "acronym": "IVCNZ",
+    "acronymx": "IVCNZ'25",
+    "url": "https://ivcnz2025.wgtn.ac.nz/",
+    "track": "research",
+    "submission-deadline": "2025-09-11",
+    "estimated": false,
+    "notification": "2025-10-13",
+    "cfp": null,
+    "venue": {
+      "city": "Wellington",
+      "address": "Wellington, New Zealand",
+      "lat": -41.2865,
+      "lon": 174.7762,
+      "region": "Australasia"
+    },
+    "dates": "November 19-21, 2025"
+  },
+  {
+    "name": "23rd Pacific Rim International Conference on Artificial Intelligence",
+    "acronym": "PRICAI",
+    "acronymx": "PRICAI'26",
+    "url": "https://pricai.org/",
+    "track": "research",
+    "submission-deadline": "2026-06-13",
+    "estimated": false,
+    "notification": "2026-08-15",
+    "cfp": null,
+    "venue": {
+      "city": "Guangzhou",
+      "address": "South China Normal University, Guangzhou, China",
+      "lat": 23.1291,
+      "lon": 113.2644,
+      "region": "Asia"
+    },
+    "dates": "November 17-20, 2026"
   }
 ]
