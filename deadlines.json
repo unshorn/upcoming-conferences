@@ -756,5 +756,138 @@
       "region": "Asia"
     },
     "dates": "November 17-20, 2026"
+  },
+  {
+    "name": "Conference on Computer Vision and Pattern Recognition",
+    "acronym": "CVPR",
+    "acronymx": "CVPR'27",
+    "url": "https://cvpr.thecvf.com/",
+    "track": "research",
+    "submission-deadline": "2026-11-15",
+    "estimated": true,
+    "notification": "2027-02-28",
+    "cfp": null,
+    "venue": {
+      "city": "TBD",
+      "address": "TBD",
+      "lat": null,
+      "lon": null,
+      "region": "other"
+    },
+    "dates": "June 2027"
+  },
+  {
+    "name": "Forty-fourth International Conference on Machine Learning",
+    "acronym": "ICML",
+    "acronymx": "ICML'27",
+    "url": "https://icml.cc/",
+    "track": "research",
+    "submission-deadline": "2027-01-28",
+    "estimated": true,
+    "notification": null,
+    "cfp": null,
+    "venue": {
+      "city": "TBD",
+      "address": "TBD",
+      "lat": null,
+      "lon": null,
+      "region": "other"
+    },
+    "dates": "July 2027"
+  },
+  {
+    "name": "International Conference on Learning Representations",
+    "acronym": "ICLR",
+    "acronymx": "ICLR'27",
+    "url": "https://iclr.cc/",
+    "track": "research",
+    "submission-deadline": "2026-09-24",
+    "estimated": true,
+    "notification": "2027-01-25",
+    "cfp": null,
+    "venue": {
+      "city": "TBD",
+      "address": "TBD",
+      "lat": null,
+      "lon": null,
+      "region": "other"
+    },
+    "dates": "April 2027"
+  },
+  {
+    "name": "Forty-First AAAI Conference on Artificial Intelligence",
+    "acronym": "AAAI",
+    "acronymx": "AAAI'27",
+    "url": "https://aaai.org/",
+    "track": "research",
+    "submission-deadline": "2026-08-01",
+    "estimated": true,
+    "notification": "2026-11-08",
+    "cfp": null,
+    "venue": {
+      "city": "TBD",
+      "address": "TBD",
+      "lat": null,
+      "lon": null,
+      "region": "other"
+    },
+    "dates": "January 2027"
+  },
+  {
+    "name": "International Joint Conference on Artificial Intelligence",
+    "acronym": "IJCAI",
+    "acronymx": "IJCAI'27",
+    "url": "https://www.ijcai.org/",
+    "track": "research",
+    "submission-deadline": "2027-01-19",
+    "estimated": true,
+    "notification": "2027-04-29",
+    "cfp": null,
+    "venue": {
+      "city": "TBD",
+      "address": "TBD",
+      "lat": null,
+      "lon": null,
+      "region": "other"
+    },
+    "dates": "August 2027"
+  },
+  {
+    "name": "International Conference on Computer Vision",
+    "acronym": "ICCV",
+    "acronymx": "ICCV'27",
+    "url": "https://thecvf.com/",
+    "track": "research",
+    "submission-deadline": "2027-03-07",
+    "estimated": true,
+    "notification": "2027-06-20",
+    "cfp": null,
+    "venue": {
+      "city": "TBD",
+      "address": "TBD",
+      "lat": null,
+      "lon": null,
+      "region": "other"
+    },
+    "dates": "October 2027"
+  },
+  {
+    "name": "41st International Conference on Image and Vision Computing New Zealand",
+    "acronym": "IVCNZ",
+    "acronymx": "IVCNZ'26",
+    "url": "https://ivcnz.wgtn.ac.nz/",
+    "track": "research",
+    "submission-deadline": "2026-09-11",
+    "estimated": true,
+    "notification": "2026-10-13",
+    "cfp": null,
+    "venue": {
+      "city": "TBD",
+      "address": "TBD",
+      "lat": null,
+      "lon": null,
+      "region": "Australasia"
+    },
+    "dates": "November 2026"
   }
 ]
