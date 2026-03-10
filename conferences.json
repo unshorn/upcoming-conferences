@@ -305,5 +305,83 @@
     },
     "field": "computer vision",
     "sponsor": "IEEE"
+  },
+  {
+    "name": "International Conference on Machine Learning",
+    "acronym": "ICML",
+    "url": "https://icml.cc/",
+    "see-also": [],
+    "core-rank": {
+      "rank": "A*",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/"
+    },
+    "field": "artificial intelligence",
+    "sponsor": "other"
+  },
+  {
+    "name": "International Conference on Learning Representations",
+    "acronym": "ICLR",
+    "url": "https://iclr.cc/",
+    "see-also": [],
+    "core-rank": {
+      "rank": "A*",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/"
+    },
+    "field": "artificial intelligence",
+    "sponsor": "other"
+  },
+  {
+    "name": "AAAI Conference on Artificial Intelligence",
+    "acronym": "AAAI",
+    "url": "https://aaai.org/conference/",
+    "see-also": [],
+    "core-rank": {
+      "rank": "A*",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/"
+    },
+    "field": "artificial intelligence",
+    "sponsor": "other"
+  },
+  {
+    "name": "International Joint Conference on Artificial Intelligence",
+    "acronym": "IJCAI",
+    "url": "https://www.ijcai.org/",
+    "see-also": [],
+    "core-rank": {
+      "rank": "A*",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/"
+    },
+    "field": "artificial intelligence",
+    "sponsor": "other"
+  },
+  {
+    "name": "International Conference on Computer Vision",
+    "acronym": "ICCV",
+    "url": "https://thecvf.com/",
+    "see-also": [],
+    "core-rank": {
+      "rank": "A*",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/"
+    },
+    "field": "computer vision",
+    "sponsor": "IEEE"
+  },
+  {
+    "name": "European Conference on Computer Vision",
+    "acronym": "ECCV",
+    "url": "https://eccv.ecva.net/",
+    "see-also": [],
+    "core-rank": {
+      "rank": "A",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/"
+    },
+    "field": "computer vision",
+    "sponsor": "other"
   }
 ]

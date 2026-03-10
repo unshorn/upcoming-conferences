@@ -585,5 +585,119 @@
       "region": "North America"
     },
     "dates": "June 14-18, 2026"
+  },
+  {
+    "name": "Forty-third International Conference on Machine Learning",
+    "acronym": "ICML",
+    "acronymx": "ICML'26",
+    "url": "https://icml.cc/Conferences/2026",
+    "track": "research",
+    "submission-deadline": "2026-01-28",
+    "estimated": false,
+    "notification": null,
+    "cfp": null,
+    "venue": {
+      "city": "Seoul",
+      "address": "COEX Convention & Exhibition Center, Seoul, South Korea",
+      "lat": 37.5133,
+      "lon": 127.0581,
+      "region": "Asia"
+    },
+    "dates": "July 6-11, 2026"
+  },
+  {
+    "name": "International Conference on Learning Representations",
+    "acronym": "ICLR",
+    "acronymx": "ICLR'26",
+    "url": "https://iclr.cc/Conferences/2026",
+    "track": "research",
+    "submission-deadline": "2025-09-24",
+    "estimated": false,
+    "notification": "2026-01-25",
+    "cfp": null,
+    "venue": {
+      "city": "Rio de Janeiro",
+      "address": "Rio de Janeiro, Brazil",
+      "lat": -22.9068,
+      "lon": -43.1729,
+      "region": "other"
+    },
+    "dates": "April 23-27, 2026"
+  },
+  {
+    "name": "Fortieth AAAI Conference on Artificial Intelligence",
+    "acronym": "AAAI",
+    "acronymx": "AAAI'26",
+    "url": "https://aaai.org/conference/aaai/aaai-26/",
+    "track": "research",
+    "submission-deadline": "2025-08-01",
+    "estimated": false,
+    "notification": "2025-11-08",
+    "cfp": null,
+    "venue": {
+      "city": "Singapore",
+      "address": "Singapore EXPO, Singapore",
+      "lat": 1.3340,
+      "lon": 103.9610,
+      "region": "Asia"
+    },
+    "dates": "January 20-27, 2026"
+  },
+  {
+    "name": "International Joint Conference on Artificial Intelligence",
+    "acronym": "IJCAI",
+    "acronymx": "IJCAI'26",
+    "url": "https://ijcai26.org/",
+    "track": "research",
+    "submission-deadline": "2026-01-19",
+    "estimated": false,
+    "notification": "2026-04-29",
+    "cfp": null,
+    "venue": {
+      "city": "Bremen",
+      "address": "Bremen, Germany",
+      "lat": 53.0793,
+      "lon": 8.8017,
+      "region": "Europe"
+    },
+    "dates": "August 15-21, 2026"
+  },
+  {
+    "name": "International Conference on Computer Vision",
+    "acronym": "ICCV",
+    "acronymx": "ICCV'25",
+    "url": "https://iccv2025.thecvf.com/",
+    "track": "research",
+    "submission-deadline": "2025-03-07",
+    "estimated": false,
+    "notification": "2025-06-20",
+    "cfp": null,
+    "venue": {
+      "city": "Honolulu",
+      "address": "Honolulu Convention Center, Honolulu, HI, USA",
+      "lat": 21.2891,
+      "lon": -157.8384,
+      "region": "North America"
+    },
+    "dates": "October 19-23, 2025"
+  },
+  {
+    "name": "European Conference on Computer Vision",
+    "acronym": "ECCV",
+    "acronymx": "ECCV'26",
+    "url": "https://eccv2026.ecva.net/",
+    "track": "research",
+    "submission-deadline": "2026-03-05",
+    "estimated": false,
+    "notification": null,
+    "cfp": null,
+    "venue": {
+      "city": "Malmö",
+      "address": "Malmö, Sweden",
+      "lat": 55.6049,
+      "lon": 13.0038,
+      "region": "Europe"
+    },
+    "dates": "September 8-13, 2026"
   }
 ]
