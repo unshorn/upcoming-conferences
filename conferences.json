@@ -279,5 +279,18 @@
     },
     "field": "security",
     "sponsor": "IEEE"
+  },
+    {
+    "name": "International Symposium on Research in Attacks, Intrusions and Defenses",
+    "acronym": "RAID",
+    "url": "https://raid2026.org/",
+    "see-also": [],
+    "core-rank": {
+      "rank": "A",
+      "system": "CORE2023",
+      "url": "https://portal.core.edu.au/conf-ranks/?search=RAID&by=all&source=CORE2023&sort=atitle&page=1"
+    },
+    "field": "security",
+    "sponsor": "IEEE"
   }
 ]
